@@ -8,7 +8,8 @@
   - `01-options.png` 线路列表与备注
   - `02-speedtest.png` 线路测速（解析延迟 + CDN 节点 + 速率）
   - `03-button.png` B 站视频页右下角的复制按钮
-- 隐私政策：`PRIVACY.md`（Markdown 原文）+ `store/privacy-policy.html`（可直接托管的网页版，含中英双语）
+- 隐私政策：已发布 → `https://bluemoon23333.github.io/bilibili-link-copier/privacy.html`
+- 源码仓库：`https://github.com/bluemoon23333/bilibili-link-copier`（Pages 从 `main` 的 `/docs` 发布）
 
 ---
 
@@ -20,9 +21,9 @@
 | 简短描述 | `一键复制 B 站视频的 BV 号、解析站链接或最快 CDN 直链；支持多线路、右键菜单、线路测速和页面浮动按钮。` | 对应 manifest `description`，≤132 字符 |
 | 分类 | `Fun` / `Productivity`（建议 Productivity → 社交工具相关） | 按 Partner Center 下拉选择 |
 | 语言 | 中文（简体）+ English（可选） | 包内已带 `_locales/zh_CN` 与 `_locales/en` |
-| 隐私政策 URL | 把 `store/privacy-policy.html` 放到可公开访问的 **HTTPS** 地址，填该 URL（托管办法见下面「§5」） | 扩展会向第三方解析站发请求，商店要求提供 |
+| 隐私政策 URL | `https://bluemoon23333.github.io/bilibili-link-copier/privacy.html` | 已托管在 GitHub Pages，可直接填 |
 | 支持邮箱 | `bluemoon23333@163.com` | 审核与用户联系用 |
-| 官网（可选） | 仓库地址或说明页 | 可留空 |
+| 官网（可选） | `https://github.com/bluemoon23333/bilibili-link-copier` | 已建仓库 |
 
 > manifest 的 `default_locale` 已设为 `zh_CN`，Edge 上传页要求的「指定默认语言等详细信息的清单文件」即指此。
 
@@ -72,12 +73,24 @@
 - [x] `_locales/zh_CN/messages.json`、`_locales/en/messages.json`
 - [x] 图标 16/32/48/128 + 商店 300×300
 - [x] 3 张 1280×800 截图
-- [x] `PRIVACY.md` + `store/privacy-policy.html`（网页版隐私说明，可直接托管）
+- [x] 隐私政策已上线：`https://bluemoon23333.github.io/bilibili-link-copier/privacy.html`（HTTP 200，已用无痕方式验证）
 - [x] 支持邮箱已填 `bluemoon23333@163.com`
 - [ ] 用 `node tools/pack.mjs` 重新打包，确认 zip 根目录直接是 `manifest.json`（不要多套一层文件夹）
 - [ ] 在 Partner Center 上传 zip → 填写上面的文案 → 提交审核
 
-## 5. 隐私政策怎么放上网（三选一）
+## 5. 隐私政策已上线（存档说明）
+
+当前地址：**`https://bluemoon23333.github.io/bilibili-link-copier/privacy.html`**
+
+做法（已由脚本完成，留档备查）：
+
+1. `docs/privacy.html` 是隐私政策网页版（中英双语），`docs/index.html` 是扩展介绍页；
+2. 仓库 `https://github.com/bluemoon23333/bilibili-link-copier` 为 public，Pages 源设为 `main` 分支的 `/docs`；
+3. 推送后 30~60 秒生效，`https://bluemoon23333.github.io/bilibili-link-copier/` 返回 200。
+
+以后要改：改 `docs/privacy.html` → `git push` → Pages 自动重建。
+
+其他托管方式（如将来想换域名）：
 
 审核方会真的打开这个 URL，所以必须是**公开、可直接访问、不需要登录**的 HTTPS 地址。
 

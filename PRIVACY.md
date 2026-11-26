@@ -1,6 +1,9 @@
 # 隐私说明 / Privacy Policy
 
 适用扩展：**B站链接复制（解析线路 / BV号）**（manifest 名 `__MSG_extName__`，默认语言 `zh_CN`）
+
+> 在线版本（商店填写的地址）：https://bluemoon23333.github.io/bilibili-link-copier/privacy.html
+> 源码仓库：https://github.com/bluemoon23333/bilibili-link-copier
 最后更新：2026-11-26
 
 ## 一句话
