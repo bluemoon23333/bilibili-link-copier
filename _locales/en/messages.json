@@ -1,0 +1,11 @@
+{
+  "extName": {
+    "message": "Bilibili Link Copier"
+  },
+  "extDesc": {
+    "message": "Copy a Bilibili video's BV id, resolver link or the fastest CDN URL. Multi-line, context menu, speed test, page button."
+  },
+  "actionTitle": {
+    "message": "Click: line 1　Double-click: line 2　Right-click: more lines / speed test"
+  }
+}

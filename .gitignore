@@ -1,0 +1,11 @@
+# 构建产物
+dist/
+# 依赖（本项目没有，但防止以后误提交）
+node_modules/
+# 临时目录 / 日志
+.tmp*
+*.log
+# 编辑器
+.vscode/
+.idea/
+.DS_Store

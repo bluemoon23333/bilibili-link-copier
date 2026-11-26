@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>隐私说明 · B站链接复制（解析线路 / BV号）</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --text: #1f2328;
+        --muted: #6a7280;
+        --line: #e6e8ee;
+        --accent: #fb7299;
+        --code: #f2f3f7;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #14161a;
+          --card: #1c1f24;
+          --text: #e6e8ec;
+          --muted: #9aa3af;
+          --line: #2c3037;
+          --code: #24282f;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 32px 16px 64px;
+        background: var(--bg);
+        color: var(--text);
+        font: 15px/1.75 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 28px 30px 34px;
+      }
+      h1 { font-size: 22px; margin: 0 0 6px; }
+      h2 { font-size: 17px; margin: 28px 0 10px; }
+      p, li { margin: 8px 0; }
+      .sub { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+      table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+      th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+      th { background: var(--code); font-weight: 600; }
+      code {
+        background: var(--code);
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-size: 13px;
+      }
+      hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0 24px; }
+      a { color: var(--accent); }
+      .badge {
+        display: inline-block;
+        padding: 2px 9px;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--accent) 14%, transparent);
+        color: var(--accent);
+        font-size: 12.5px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="badge">隐私说明 / Privacy Policy</span>
+      <h1>B站链接复制（解析线路 / BV号）</h1>
+      <p class="sub">最后更新：2026-11-26 · 适用于 Microsoft Edge Add-ons 与 Chrome Web Store 版本</p>
+
+      <h2>一句话</h2>
+      <p>这个扩展<strong>不收集、不上传、不出售</strong>你的任何个人数据。所有操作都在你的浏览器本地完成。</p>
+
+      <h2>它读什么、为什么读</h2>
+      <table>
+        <thead>
+          <tr><th>数据</th><th>什么时候</th><th>用途</th><th>是否离开本机</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>当前标签页的网址、页面标题、视频 BV 号 / 分 P 号</td>
+            <td>你点图标、双击图标、用右键菜单，或在视频页点浮动按钮时</td>
+            <td>拼出要复制的链接</td>
+            <td>否（只在本地拼字符串）</td>
+          </tr>
+          <tr>
+            <td>你填写的「线路前缀」和「备注」</td>
+            <td>打开设置页、复制时</td>
+            <td>记住你的配置</td>
+            <td>否，存在 <code>chrome.storage.sync</code>（由你所在的浏览器账号决定是否跨设备同步）</td>
+          </tr>
+          <tr>
+            <td>上次测速结果（各线路延迟、CDN 节点与速率）</td>
+            <td>打开设置页、复制「智能最快」时</td>
+            <td>显示上次结果、挑选最快节点</td>
+            <td>否，存在 <code>chrome.storage.local</code></td>
+          </tr>
+          <tr>
+            <td>剪贴板写入</td>
+            <td>复制时</td>
+            <td>把链接放进剪贴板</td>
+            <td>否</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>它联网做什么</h2>
+      <p>只有下面两类请求，全部由你的浏览器直接发往目标网站，不经过任何第三方服务器：</p>
+      <ol>
+        <li>
+          <strong>解析线路请求</strong>：你点的「线路」本身就是第三方解析站（如 <code>api.xuan25.com</code>、<code>ckapi.sevenbrothers.cn</code>、
+          <code>bil.ouo.chat</code>、<code>biliplayer.91vrchat.com</code>、<code>ktv.chiooone.com</code>）或 B 站接口。扩展把你的 BV 号拼进这些地址并发起请求，仅此而已。
+        </li>
+        <li>
+          <strong>测速请求</strong>：你点「开始测速」时，扩展用你填的测试 BV 号向这些线路各发若干次请求，并读取解析出来的 CDN 地址开头几 MB 数据来估算速度。
+        </li>
+      </ol>
+      <p>扩展本身<strong>没有自有服务器</strong>，不上报任何统计、日志或使用数据。</p>
+
+      <h2>权限说明</h2>
+      <table>
+        <thead>
+          <tr><th>权限</th><th>为什么需要</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>activeTab</code> / <code>scripting</code></td><td>读取当前标签页的 BV 号、分 P 号，以及在页面上写入剪贴板（兜底方案）</td></tr>
+          <tr><td><code>offscreen</code></td><td>用离屏文档写剪贴板（MV3 里 service worker 不能直接写）</td></tr>
+          <tr><td><code>clipboardWrite</code></td><td>把链接写进剪贴板</td></tr>
+          <tr><td><code>storage</code></td><td>保存线路配置与上次测速结果</td></tr>
+          <tr><td><code>contextMenus</code></td><td>生成右键菜单中的线路</td></tr>
+          <tr><td><code>host_permissions</code>（B 站 / B 站 CDN / 默认解析站）</td><td>直接向这些站点发起解析与测速请求，不弹跨域授权框</td></tr>
+          <tr><td><code>optional_host_permissions: &lt;all_urls&gt;</code></td><td>只有你<strong>主动点「开始测速」</strong>且配置里有别的站点时才申请；拒绝也不影响复制功能</td></tr>
+        </tbody>
+      </table>
+
+      <h2>你的控制权</h2>
+      <ul>
+        <li>线路、备注、测试 BV 号全部由你填写，可以随时清空或恢复默认。</li>
+        <li>测速结果只存在本机，设置页有「恢复默认」，卸载扩展会一并删除。</li>
+        <li>想彻底不联网：把线路留空（只复制 BV 号）、不点测速即可；扩展不会主动发任何请求。</li>
+      </ul>
+
+      <h2>第三方说明</h2>
+      <p>解析站、B 站 CDN 都是第三方服务，它们各自的隐私政策与可用性由对方负责。本扩展只是把你的 BV 号拼进它们的公开接口。</p>
+
+      <h2>联系方式</h2>
+      <p>有问题请邮件联系：<a href="mailto:bluemoon23333@163.com">bluemoon23333@163.com</a></p>
+
+      <hr />
+
+      <h1 id="en">Privacy Policy</h1>
+      <p>This extension does <strong>not</strong> collect, upload, or sell any personal data. Everything happens locally in your browser.</p>
+      <ul>
+        <li>It reads the current tab's URL / title / BV id only when you click the toolbar icon, double-click it, use the context menu, or press the in-page “复制链接” button — purely to build the string that gets copied.</li>
+        <li>Your line prefixes, notes, and the last speed-test result are stored via <code>chrome.storage</code> (sync/local) on your own browser profile.</li>
+        <li>
+          Network requests go <strong>directly</strong> from your browser to the resolver sites you configured and to Bilibili's CDN, solely to resolve a video URL or to measure speed when you press “开始测速”.
+          There is no backend server and no telemetry.
+        </li>
+        <li>The optional <code>&lt;all_urls&gt;</code> permission is requested only when you start a speed test that needs other hosts; declining it does not affect copying.</li>
+      </ul>
+      <p>Third-party resolver sites have their own policies and availability; this extension merely calls their public endpoints with your BV id.</p>
+      <p>Contact: <a href="mailto:bluemoon23333@163.com">bluemoon23333@163.com</a></p>
+    </main>
+  </body>
+</html>

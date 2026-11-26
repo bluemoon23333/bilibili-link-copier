@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>设置 · B站链接复制</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --text: #1c1f26;
+        --muted: #6b7280;
+        --line: #e3e6ee;
+        --accent: #fb7299;
+        --accent-2: #7c5cff;
+        --code-bg: #f2f3f7;
+        --ok: #2e9e5b;
+        --warn: #d7263d;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #15171c;
+          --card: #1d2027;
+          --text: #e8eaf0;
+          --muted: #9aa1ad;
+          --line: #2b2f39;
+          --code-bg: #14161b;
+          --ok: #4cc38a;
+          --warn: #ff6b81;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px 20px 56px;
+        background: var(--bg);
+        color: var(--text);
+        font: 14px/1.6 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+
+      header img {
+        width: 44px;
+        height: 44px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 19px;
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 13px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .sub {
+        margin: 2px 0 0;
+        color: var(--muted);
+      }
+
+      section {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 16px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 9px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--code-bg);
+        color: inherit;
+        font: 13px/1.5 Consolas, "Cascadia Mono", monospace;
+      }
+
+      input[type="text"]:focus,
+      select:focus {
+        outline: 2px solid var(--accent-2);
+        outline-offset: 1px;
+      }
+
+      .hint {
+        margin: 0 0 12px;
+        color: var(--muted);
+      }
+
+      .hint b {
+        color: var(--text);
+      }
+
+      code {
+        background: var(--code-bg);
+        border-radius: 5px;
+        padding: 1px 5px;
+        font: 12.5px/1.5 Consolas, "Cascadia Mono", monospace;
+      }
+
+      .entry {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 0;
+        border-top: 1px dashed var(--line);
+      }
+
+      .entry:first-child {
+        border-top: 0;
+      }
+
+      .entry input[data-role="value"] {
+        flex: 1 1 220px;
+        min-width: 0;
+      }
+
+      .entry input[data-role="note"] {
+        flex: 0 0 108px;
+        width: 108px;
+        font-family: inherit;
+        font-size: 13px;
+      }
+
+      .entry select {
+        flex: 0 0 auto;
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--code-bg);
+        color: inherit;
+        font: inherit;
+        font-size: 13px;
+      }
+
+      .idx {
+        flex: 0 0 20px;
+        text-align: center;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .role {
+        flex: 0 0 auto;
+        width: 44px;
+        text-align: center;
+        padding: 2px 0;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .role.primary {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      .role.secondary {
+        color: var(--accent-2);
+        border-color: var(--accent-2);
+      }
+
+      .role.menu {
+        color: var(--muted);
+        border-color: var(--line);
+      }
+
+      .tools {
+        flex: 0 0 auto;
+        display: flex;
+        gap: 4px;
+      }
+
+      .tools button {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+
+      .tools button:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 7px 0;
+        border-top: 1px dashed var(--line);
+      }
+
+      .row:first-of-type {
+        border-top: 0;
+      }
+
+      .tag {
+        flex: 0 0 74px;
+        color: var(--muted);
+      }
+
+      .row code,
+      .menu-preview code {
+        flex: 1;
+        background: transparent;
+        padding: 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
+      .menu-preview {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .menu-preview .item {
+        display: flex;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .menu-preview .name {
+        flex: 0 0 auto;
+        color: var(--muted);
+      }
+
+      .menu-preview .empty {
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      button {
+        padding: 9px 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--card);
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      button:hover:not(:disabled) {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      button.primary-btn {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #fff;
+      }
+
+      button.primary-btn:hover:not(:disabled) {
+        color: #fff;
+        filter: brightness(1.05);
+      }
+
+      #add {
+        margin-top: 12px;
+      }
+
+      #status {
+        color: var(--muted);
+      }
+
+      /* ---------- 测速面板 ---------- */
+
+      .speed-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-end;
+        margin-bottom: 10px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .field input {
+        width: 148px;
+      }
+
+      .field select {
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--code-bg);
+        color: inherit;
+        font: inherit;
+        font-size: 13px;
+      }
+
+      .speed-status {
+        min-height: 22px;
+        color: var(--muted);
+      }
+
+      .speed-status.ok {
+        color: var(--ok);
+      }
+
+      .speed-status.warn {
+        color: var(--warn);
+      }
+
+      .speed-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 18px;
+        margin: 8px 0 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .speed-summary b {
+        color: var(--text);
+      }
+
+      .speed-empty {
+        color: var(--muted);
+        padding: 4px 0;
+      }
+
+      .speed-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      .speed-table th {
+        text-align: left;
+        font-weight: 500;
+        color: var(--muted);
+        border-bottom: 1px solid var(--line);
+        padding: 6px 8px;
+        white-space: nowrap;
+      }
+
+      .speed-table td {
+        border-bottom: 1px dashed var(--line);
+        padding: 7px 8px;
+        vertical-align: top;
+      }
+
+      .speed-table tr.detail td {
+        border-bottom: 1px solid var(--line);
+        background: var(--code-bg);
+        font-size: 12px;
+        color: var(--muted);
+        padding: 6px 8px 8px 30px;
+        line-height: 1.7;
+      }
+
+      .speed-table .line-name {
+        font-weight: 600;
+      }
+
+      .speed-table .line-host {
+        display: block;
+        color: var(--muted);
+        font-size: 11.5px;
+      }
+
+      .speed-table .num {
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      .speed-table .grade {
+        white-space: nowrap;
+      }
+
+      .tone-great,
+      .tone-good {
+        color: var(--ok);
+      }
+
+      .tone-fair {
+        color: #c99a00;
+      }
+
+      .tone-slow {
+        color: #d97b00;
+      }
+
+      .tone-bad,
+      .tone-fail {
+        color: var(--warn);
+      }
+
+      .tone-unknown,
+      .tone-skipped {
+        color: var(--muted);
+      }
+
+      .cdn-chip {
+        display: inline-block;
+        margin-right: 12px;
+        white-space: nowrap;
+      }
+
+      .cdn-summary {
+        color: var(--muted);
+      }
+
+      .hint.warn {
+        padding: 9px 12px;
+        border-left: 3px solid var(--accent);
+        border-radius: 6px;
+        background: color-mix(in srgb, var(--accent) 8%, transparent);
+        color: var(--text);
+      }
+
+      .speed-legend {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 720px) {
+        .entry {
+          flex-wrap: wrap;
+        }
+
+        .entry input[data-role="value"] {
+          flex: 1 1 100%;
+          order: 3;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="../icons/icon48.png" alt="" />
+        <div>
+          <h1>B站链接复制 · 设置</h1>
+          <p class="sub">
+            点图标复制第 1 条 · 双击复制第 2 条 · 右键用后面的线路
+          </p>
+        </div>
+      </header>
+
+      <section>
+        <h2>线路列表</h2>
+        <p class="hint">
+          把常用链接放进来，按位置就能用：<b>第 1 条</b>点图标复制，<b>第 2 条</b>双击图标复制，<b>第 3 条起</b>在右键菜单里。
+          每条 = 前缀 + 接什么（链接或 BV 号）；<b>前缀留空</b>就是只复制 BV 号。备注会显示在菜单里。改完自动保存。
+        </p>
+        <p class="hint warn">
+          ⚠️ 第 3 条「智能最快」复制的是 <b>CDN 视频直链</b>：只代表<b>你这台电脑</b>下载快，好友那边的速度不一定好（还可能过期）。
+          想和房间里的人一起顺畅看，优先用解析站链接——它会给每个人分配各自最快的节点。
+        </p>
+        <div id="list"></div>
+        <button id="add" type="button">＋ 添加一条线路</button>
+      </section>
+
+      <section>
+        <h2>效果预览</h2>
+        <div class="row"><span class="tag">单击</span><code id="preview-single"></code></div>
+        <div class="row"><span class="tag">双击</span><code id="preview-double"></code></div>
+        <div class="row">
+          <span class="tag">右键菜单</span>
+          <div class="menu-preview" id="preview-menu"></div>
+        </div>
+      </section>
+
+      <section id="speed">
+        <h2>线路测速</h2>
+        <p class="hint">
+          点「开始测速」，会测出每条线路的<b>解析速度</b>（等多久拿到地址）和它给出的 <b>CDN 速度</b>（下载快不快），并用图标标出好坏。
+          结果会自动保存，下次打开还能看。测速只读视频开头几 MB，十几秒就完成。
+        </p>
+        <div class="speed-bar">
+          <label class="field">
+            测试 BV 号
+            <input id="speed-bv" type="text" spellcheck="false" autocomplete="off" maxlength="12" />
+          </label>
+          <label class="field">
+            探测轮次
+            <select id="speed-depth"></select>
+          </label>
+          <button id="speed-run" type="button" class="primary-btn">开始测速</button>
+          <button id="speed-view" type="button">查看上次结果</button>
+          <button id="speed-stop" type="button" hidden>停止</button>
+        </div>
+        <div id="speed-status" class="speed-status" role="status" aria-live="polite"></div>
+        <div id="speed-result"></div>
+      </section>
+
+      <div class="actions">
+        <button id="reset" type="button">恢复默认</button>
+        <span id="status" role="status" aria-live="polite"></span>
+      </div>
+    </main>
+
+    <script src="options.js" type="module"></script>
+  </body>
+</html>
