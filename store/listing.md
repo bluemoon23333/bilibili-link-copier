@@ -3,7 +3,8 @@
 本目录是给 **Microsoft Edge Add-ons**（Partner Center）用的上架素材与填写文案，不参与扩展运行，也不会被打进 `dist/*.zip`。
 
 - 扩展包：`node tools/pack.mjs` → `dist/bilibili-bv-copier-<version>.zip`（根目录含 `manifest.json` / `_locales` / `src` / `icons`）
-- 商店图标：`store/icon-300.png`（300×300，1:1）
+- 商店徽标：`store/logo-300.png`（300×300，1:1，粉紫渐变圆角 + 播放三角 + BV 胶囊；由 `tools/make-logo.py` 生成）
+- 双语文案与徽标说明：`store/listing-bilingual.md`
 - 截图：`store/screenshots/`（1280×800，PNG）
   - `01-options.png` 线路列表与备注
   - `02-speedtest.png` 线路测速（解析延迟 + CDN 节点 + 速率）
@@ -71,7 +72,7 @@
 
 - [x] `manifest.json` 含 `name` / `version` / `description` / `permissions` / `default_locale`
 - [x] `_locales/zh_CN/messages.json`、`_locales/en/messages.json`
-- [x] 图标 16/32/48/128 + 商店 300×300
+- [x] 图标 16/32/48/128 + 商店徽标 300×300（`store/logo-300.png`）
 - [x] 3 张 1280×800 截图
 - [x] 隐私政策已上线：`https://bluemoon23333.github.io/bilibili-link-copier/privacy.html`（HTTP 200，已用无痕方式验证）
 - [x] 支持邮箱已填 `bluemoon23333@163.com`

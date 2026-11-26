@@ -284,7 +284,8 @@ tools/shot-store.mjs         生成商店素材：store/screenshots/ 下三张 1
 tools/lib/browser.mjs        上面几个浏览器脚本共用的 CDP 小工具
 docs/speedtest.png           测速结果长什么样（实测截图）
 store/listing.md             Edge 商店上架文案（名称 / 简短描述 / 详细描述 / 权限用途）
-store/icon-300.png           商店图标 300×300
+store/logo-300.png           商店徽标 300×300（tools/make-logo.py 生成）
+store/listing-bilingual.md   商店中英文文案
 store/screenshots/           商店截图 1280×800（设置页 / 测速 / 页面按钮）
 PRIVACY.md                   隐私说明（Markdown 原文）
 store/privacy-policy.html    隐私说明网页版（可直接托管，上架时填它的 URL）
@@ -318,7 +319,7 @@ node tools/shot-store.mjs    # → store/screenshots/*.png（1280×800）
 ```
 
 - manifest 已加 `"default_locale": "zh_CN"` 与 `_locales/zh_CN|en`，满足上传页「清单文件要含默认语言」的要求；
-- 商店图标 `store/icon-300.png`（300×300），截图 3 张 1280×800（Edge 只接受 1280×800 或 640×480）；
+- 商店徽标 `store/logo-300.png`（300×300），截图 3 张 1280×800（Edge 只接受 1280×800 或 640×480）；
 - 详细描述、权限用途说明可直接从 `store/listing.md` 粘贴；
 - `PRIVACY.md` 是 Markdown 原文；`store/privacy-policy.html` 是可直接托管的网页版（中英双语），放到任意 HTTPS 静态空间（GitHub Pages / Gitee Pages / 自己的域名）后把地址填进商店即可，`store/listing.md` §5 有三种托管办法；
 - 支持邮箱已填在 `store/listing.md` 与 `PRIVACY.md`（`bluemoon23333@163.com`）。
