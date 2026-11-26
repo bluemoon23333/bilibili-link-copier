@@ -1,5 +1,9 @@
 # B站链接复制（浏览器扩展）
 
+> 仓库：<https://github.com/bluemoon23333/bilibili-link-copier> · 主页：<https://bluemoon23333.github.io/bilibili-link-copier/> · 隐私政策：<https://bluemoon23333.github.io/bilibili-link-copier/privacy.html>
+> 下载安装：<https://github.com/bluemoon23333/bilibili-link-copier/releases/latest>（zip 解压后 `edge://extensions` → 开发人员模式 → 加载解压缩的扩展）
+
+
 把 B 站视频页一键变成「现在就能播的链接」：复制 BV 号、复制裸链接，或者套上你惯用的解析站前缀。
 
 - 配置是一个**有序列表**，每条 = **前缀字符串** + **后面接什么**（接有效链接 / 接 BV 号）+ **备注**。
