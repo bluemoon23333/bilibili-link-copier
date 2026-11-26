@@ -291,17 +291,51 @@ async function handleAction(tab, action) {
 }
 
 /**
- * 页面右下角的「复制链接」小按钮（content script 注入）点一下 = 点一下扩展图标。
+ * 页面右下角的「复制链接」小按钮（content script 注入）：
+ * - click       → 第 1 条（等同点一下扩展图标）
+ * - 双击         → 第 2 条（等同双击扩展图标）
+ * - contextmenu → 用 menu 行动作取第 3 条起的菜单数据，在页面里画一个小菜单
  * 返回是否复制成功，页面据此弹一个很轻的提示。
  */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (!message || message.action !== 'copy-first') return false;
+  if (!message || typeof message.action !== 'string') return false;
   const tab = sender && sender.tab ? sender.tab : null;
+
+  if (message.action === 'open-options') {
+    openOptionsPage(typeof message.anchor === 'string' ? message.anchor : '');
+    sendResponse({ ok: true });
+    return false;
+  }
+
+  if (message.action === 'menu') {
+    loadEntries()
+      .then((entries) => {
+        const items = entries.slice(MENU_START_INDEX).map((entry, offset) => {
+          const index = offset + MENU_START_INDEX;
+          return { index, title: entryMenuTitle(entry, index) };
+        });
+        sendResponse({ ok: true, items });
+      })
+      .catch(() => sendResponse({ ok: false, items: [] }));
+    return true;
+  }
+
+  let action = null;
+  if (message.action === 'copy-first') {
+    action = { type: 'first' };
+  } else if (message.action === 'copy-second') {
+    action = { type: 'index', index: DOUBLE_INDEX, plainFallback: true };
+  } else if (message.action === 'copy-index' && Number.isInteger(message.index)) {
+    action = { type: 'index', index: message.index };
+  } else {
+    return false;
+  }
+
   if (!tab || typeof tab.id !== 'number') {
     sendResponse({ ok: false, reason: '没有拿到标签页' });
     return false;
   }
-  enqueue(tab, { type: 'first' })
+  enqueue(tab, action)
     .then((ok) => sendResponse({ ok: Boolean(ok) }))
     .catch(() => sendResponse({ ok: false, reason: '复制失败' }));
   return true;

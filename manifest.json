@@ -3,7 +3,7 @@
   "name": "__MSG_extName__",
   "default_locale": "zh_CN",
   "description": "__MSG_extDesc__",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "minimum_chrome_version": "109",
   "permissions": [
     "activeTab",

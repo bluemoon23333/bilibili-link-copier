@@ -136,6 +136,12 @@ assert.equal(typeof menuHandler, 'function', 'background.js 应注册 contextMen
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const settle = () => wait(450);
+// 清空前先让上一轮的复制任务落地，避免残留写入干扰下一条断言。
+const resetClipboard = async () => {
+  await settle();
+  clipboard.length = 0;
+  badgeTexts.length = 0;
+};
 const click = () => clickHandler({ id: 7, url: pageUrl });
 const chooseMenu = (menuItemId) => menuHandler({ menuItemId }, { id: 7, url: pageUrl });
 const setEntries = (list) => store.set('linkPrefixes', list);
@@ -343,8 +349,7 @@ pageUrl = `https://www.bilibili.com/video/${BV}`;
 pageBvid = BV;
 store.clear();
 await rebuildMenus();
-clipboard = [];
-badgeTexts = [];
+await resetClipboard();
 let responded = null;
 messageHandler({ action: 'copy-first' }, { tab: { id: 7, url: pageUrl } }, (response) => {
   responded = response;
@@ -353,6 +358,46 @@ await settle();
 assert.deepEqual(clipboard, [DEFAULT_FIRST + BV], '页面按钮应复制第 1 条线路');
 assert.deepEqual(responded, { ok: true }, '页面按钮应收到回调，用来弹提示');
 assert.equal(lastBadge(), 'URL+', '页面按钮复制后角标应同步');
+
+// 17) 页面按钮双击：发 copy-second，复制第 2 条（空前缀 → 裸 BV 号）
+await resetClipboard();
+responded = null;
+messageHandler({ action: 'copy-second' }, { tab: { id: 7, url: pageUrl } }, (response) => {
+  responded = response;
+});
+await settle();
+assert.deepEqual(clipboard, [BV], '页面按钮双击应复制第 2 条线路');
+assert.deepEqual(responded, { ok: true }, '双击后也应回调页面');
+assert.equal(lastBadge(), 'BV', '双击复制 BV 号时角标为 BV');
+
+// 18) 页面按钮右键菜单里的某一条：copy-index 指定下标
+await resetClipboard();
+responded = null;
+messageHandler({ action: 'copy-index', index: 3 }, { tab: { id: 7, url: pageUrl } }, (response) => {
+  responded = response;
+});
+await settle();
+assert.deepEqual(clipboard, ['http://ckapi.sevenbrothers.cn/bili/api?id=' + BV], '应按下标复制对应线路');
+assert.deepEqual(responded, { ok: true }, '按序号复制也应回调');
+
+// 19) 页面按钮右键：menu 动作返回第 3 条起的菜单数据
+let menuPayload = null;
+messageHandler({ action: 'menu' }, { tab: { id: 7, url: pageUrl } }, (response) => {
+  menuPayload = response;
+});
+await settle();
+assert.equal(menuPayload.ok, true, '菜单数据应返回成功');
+assert.equal(menuPayload.items.length, DEFAULT_ENTRIES.length - 2, '菜单应只含第 3 条起的线路');
+assert.equal(menuPayload.items[0].index, 2, '菜单第一条的下标是 2');
+assert.equal(menuPayload.items[0].title, '3. 智能最快 · 自动挑最快节点', '菜单标题带序号与备注');
+assert.deepEqual(menuPayload.items.map((item) => item.index), [2, 3, 4, 5, 6], '菜单下标连续');
+
+// 20) 页面菜单里的「设置 / 测速」：open-options 带锚点
+createdTabs = [];
+messageHandler({ action: 'open-options', anchor: 'speed' }, { tab: { id: 7, url: pageUrl } }, () => {});
+await settle();
+assert.equal(createdTabs.length, 1, '页面菜单的测速项应新开设置页');
+assert.equal(createdTabs[0].url, 'chrome-extension://test/src/options.html#speed', '应定位到测速面板');
 
 console.log('点击流仿真测试全部通过 ✔');
 process.exit(0);
