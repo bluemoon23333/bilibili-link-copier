@@ -53,6 +53,8 @@
       pre { background: var(--code); padding: 12px 14px; border-radius: 8px; overflow: auto; }
       a { color: var(--accent); }
       img.shot { width: 100%; border: 1px solid var(--line); border-radius: 10px; margin-top: 10px; }
+      /* 长截图只露出头部，避免页面被一张图撑到几千像素 */
+      img.shot.tall { height: 560px; object-fit: cover; object-position: top center; }
       table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 14px; }
       th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
       th { background: var(--code); }
@@ -82,7 +84,7 @@
         <p>
           线路可以自己配（最多 20 条），每条 = 前缀 + 接「有效链接」或「BV 号」；前缀留空就只复制 BV 号，所以「复制 BV 号」不需要单独的功能。
         </p>
-        <img class="shot" src="./speedtest.png" alt="设置页与线路测速" />
+        <img class="shot tall" src="./speedtest.png" alt="设置页与线路测速" />
       </section>
 
       <section>
