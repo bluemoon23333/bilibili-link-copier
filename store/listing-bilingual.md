@@ -1,9 +1,8 @@
-# Edge 加载项商店：中英文双语填写文案（1.4.4）
+# Edge 加载项商店：中英文文案（1.4.4）
 
-对应「属性」页每个语言点「编辑详细信息」后要填的内容。字符数已按商店上限核对：
-名称 ≤ 45、简短描述 ≤ 132、详细描述 ≤ 10,000（且 ≥ 250）。
+「属性」页每个语言点「编辑详细信息」后填这里的内容。上限：名称 ≤ 45、简短描述 ≤ 132、详细描述 ≤ 10,000（且 ≥ 250）。
 
-徽标：`store/logo-300.png`（300×300 PNG，圆角透明背景）。
+徽标：`store/logo-300.png`（300×300，与扩展图标同款的粉色播放按钮）。
 截图：`store/screenshots/01-options.png`、`02-speedtest.png`、`03-button.png`（1280×800）。
 
 ---
@@ -16,50 +15,46 @@
 B站链接复制（解析线路 / BV号）
 ```
 
-**简短描述**（81 字符）
+**简短描述**（47 字符）
 
 ```text
-一键复制 B 站视频的 BV 号、解析站链接，或按测速挑出最快的 CDN 直链；多线路 + 备注、线路测速、页面浮动按钮，支持分P / 番剧 / 列表 / 直播。
+点一下复制 B 站视频的 BV 号、b23 短链或你常用的解析站链接，还能测一测哪条线路最快。
 ```
 
-**详细描述**（约 900 字符）
+**详细描述**（约 830 字符）
 
 ```text
-把 B 站视频链接变成「现在就能播的链接」，一次点击。
+平时在 B 站看视频，想把链接发给朋友，或者贴到 VRChat 里放，经常要复制 BV 号、短链，或者套上某个解析站的前缀。这个扩展就是帮你少点几下。
 
-【怎么用】
-· 单击工具栏图标 → 用第 1 条线路
-· 双击图标（450ms 内）→ 用第 2 条线路
-· 右键图标 → 第 3 条起的线路，外加「线路测速…」「设置前缀与备注…」
-· B 站视频页右下角还有浮动「复制链接」按钮，效果等同点一下图标
+点一下工具栏图标，复制第 1 条线路；
+快速双击图标，复制第 2 条线路；
+在图标上点右键，第 3 条起的线路都在菜单里，另外还有「线路测速」和设置。
 
-【线路 = 前缀 + 接什么】
-每条线路由「前缀」和「后面接什么」组成，后半段可以是有效链接或 BV 号。所以可以复制：
-· 裸 BV 号（前缀留空）
-· B 站短链 b23.tv
-· 你惯用的第三方解析站链接，例如 https://api.xuan25.com/bili-resolve/BV1xxxx
-最多 20 条，每条都能写备注，备注就是右键菜单里显示的名字；支持上下调整、删除、恢复默认。
+线路怎么理解？
+一条线路就是你填的一段链接前缀，后面接什么由你选：接 BV 号，或者接当前视频的链接。前缀什么都不填，就只复制 BV 号。
 
-【线路测速】
-点「开始测速」，用你指定的测试 BV 号跑一遍：连通性 → 解析站 302 延迟 → 解析出来的每个 CDN 节点（含出现概率）→ CDN 延迟与下载速率。
-结果用图标标好坏、自动保存，下次打开还能看到上一次的数据。只读视频开头几 MB，十几秒就能跑完，不会把整段视频拉下来。
+打开设置页可以：
+· 添加、删除、上下移动线路
+· 每条都能写个备注，备注会直接显示在右键菜单里
+· 选这条线路后面接 BV 号还是接链接
+· 改完自动保存，也能一键恢复默认
 
-【智能最快】
-按上一次测速的排行榜，自动解析并挑出当前最快、又连得上的 CDN 直链：
-同族 *.bilivideo.com 节点直接换 host（签名可复用，省掉反复解析）；跨族的节点则找「上次真的吐出过它」的解析站，限定尝试次数，失败自动退第二快。
+线路测速
+设置页里有「开始测速」。填一个测试用的 BV 号，它会把每条线路挨个试一遍：连不连得上、解析要等多久、解析出来的视频地址下载快不快。结果用图标标出来，下次打开还能看到上次的结果。测速只下载视频开头的一点内容，十几秒就完事。
 
-【支持的链接】
-BV 号页、av 号页、b23.tv 短链、番剧 ep、分 P（自动带 ?p=）、收藏夹 / 列表页、直播间——自动识别出可复制的那个 BV 号 / ep 号 / 房间号。
+智能最快
+默认第 3 条叫「智能最快」。点它，扩展会根据上次测速的结果，自动挑一个又快又能用的视频地址复制给你。
 
-【隐私】
-不收集、不上传、不出售任何个人数据；没有服务器，也没有统计。配置存在浏览器本地（sync 存储可跨设备同步），测速结果只留在本机。
+其他
+· B 站视频页右下角有个浮动的「复制链接」按钮，点它跟点扩展图标一样
+· 支持 BV 号页、av 号页、b23.tv 短链、番剧、分 P、收藏夹和列表页、直播间
 
-【已知限制】
-· B 站匿名接口最高 720P，所以解析站给出的直链基本是 720P（1080P 需要登录 Cookie，本扩展不做）
-· CDN 直链有时效，跨设备或过一段时间可能失效；想把链接发给朋友，优先用解析站链接
-· 直播与部分番剧依赖解析站是否支持
+隐私
+不收集任何数据，没有服务器，也没有统计。配置存在浏览器里，测速结果只留在本机。
 
-开源地址：https://github.com/bluemoon23333/bilibili-link-copier
+几点说明
+· B 站不登录时最高只有 720P，所以解析站给的地址基本是 720P
+· 视频直链会过期，想长期分享建议用解析站链接
 ```
 
 **搜索词**
@@ -68,7 +63,7 @@ BV 号页、av 号页、b23.tv 短链、番剧 ep、分 P（自动带 ?p=）、�
 bilibili, BV号, 复制链接, 解析站, VRChat, CDN, 测速
 ```
 
-**类别**：生产力（Productivity）。若商店里更偏好娱乐向，可换成「娱乐」。
+**类别**：生产力（Productivity）。
 
 ---
 
@@ -80,50 +75,42 @@ bilibili, BV号, 复制链接, 解析站, VRChat, CDN, 测速
 Bilibili Link Copier
 ```
 
-**Short description** (127 chars)
+**Short description** (115 chars)
 
 ```text
-Copy a Bilibili video's BV id, resolver link, or fastest CDN URL. Multi-line with notes, speed test, context menu, page button.
+Copy a Bilibili video's BV id, b23 short link or your favourite resolver link in one click, with a line speed test.
 ```
 
 **Detailed description**
 
 ```text
-Turn a Bilibili video page into a link that plays right away — in one click.
+Copying a Bilibili video link usually means grabbing the BV id, a b23 short link, or pasting a resolver prefix in front of it. This extension does that for you in one click.
 
-HOW IT WORKS
-· Click the toolbar icon → line 1
-· Double-click the icon (within 450 ms) → line 2
-· Right-click the icon → line 3 and below, plus "Line speed test…" and "Edit prefixes & notes…"
-· A floating "复制链接" (copy link) button also appears at the bottom-right of Bilibili video pages; it does exactly the same as clicking the icon.
+Click the toolbar icon: copy line 1.
+Double-click it quickly: copy line 2.
+Right-click it: line 3 and the rest are in the menu, plus "Line speed test" and settings.
 
-LINES = PREFIX + WHAT COMES NEXT
-Every line is a prefix plus either a valid link or a BV id, so you can copy:
-· a bare BV id (leave the prefix empty)
-· a b23.tv short link
-· your favourite third-party resolver link, e.g. https://api.xuan25.com/bili-resolve/BV1xxxx
-Up to 20 lines, each with a note; the note becomes the context-menu title. Reorder, delete or restore defaults at any time.
+What is a line?
+A line is a prefix you fill in, plus what comes after it: either a BV id or the video's link. Leave the prefix empty and you just get the BV id.
 
-LINE SPEED TEST
-Press "Start test" and the extension walks every line with a test BV id: reachability → resolver 302 latency → each CDN node it returns (with how often it appears) → CDN latency and download speed.
-Results are graded with icons, saved automatically, and shown again next time. It only reads the first few MB of the video, so a full run takes roughly 10–20 seconds.
+In the settings page you can add, remove or reorder lines, give each one a note (it shows up in the right-click menu), choose whether it appends a BV id or a link, and restore the defaults at any time. Changes save automatically.
 
-SMART FASTEST
-Using the last test ranking, it resolves the video and picks the fastest CDN that is actually reachable:
-same-family *.bilivideo.com nodes are switched by host only (the signature is reusable, so there is no need to resolve again); other families are fetched from a resolver that previously returned that node, with a hard attempt limit and automatic fallback to the next-fastest node.
+Line speed test
+Press "Start test" with a test BV id. The extension tries every line: does it connect, how long the resolver takes, and how fast the video address it returns downloads. Results are graded with icons and kept for next time. It only downloads the beginning of the video, so it takes about ten to twenty seconds.
 
-SUPPORTED LINKS
-BV pages, av pages, b23.tv short links, bangumi episodes, multi-part videos (adds ?p=), favourites / lists and live rooms — the copyable BV id / episode id / room id is detected automatically.
+Smart fastest
+The third default line, "Smart fastest", picks a fast, working video address based on your last speed test.
 
-PRIVACY
-No personal data is collected, uploaded or sold. No servers, no analytics. Settings live in your browser profile (sync storage may sync across your devices); speed-test results stay on this machine.
+Also
+· A floating "复制链接" (copy link) button on Bilibili video pages does the same as the toolbar icon.
+· Works with BV pages, av pages, b23.tv short links, bangumi episodes, multi-part videos, favourites/lists and live rooms.
 
-KNOWN LIMITS
-· Bilibili's anonymous API tops out at 720p, so resolver links are usually 720p (1080p needs a logged-in cookie; this extension does not do that).
-· CDN direct links expire. To share with friends, use a resolver link.
-· Live streams and some bangumi episodes depend on the resolver.
+Privacy
+No data is collected. No servers, no analytics. Settings stay in your browser, and speed-test results stay on this machine.
 
-Source: https://github.com/bluemoon23333/bilibili-link-copier
+Good to know
+· Bilibili caps anonymous playback at 720p, so resolver links are usually 720p.
+· CDN links expire — for sharing, a resolver link is the safer choice.
 ```
 
 **Search terms**
@@ -132,4 +119,4 @@ Source: https://github.com/bluemoon23333/bilibili-link-copier
 bilibili, BV id, copy link, resolver, VRChat, CDN, speed test
 ```
 
-**Category**: Productivity (use Entertainment if you prefer a media-oriented listing).
+**Category**: Productivity.

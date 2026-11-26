@@ -284,7 +284,7 @@ tools/shot-store.mjs         生成商店素材：store/screenshots/ 下三张 1
 tools/lib/browser.mjs        上面几个浏览器脚本共用的 CDP 小工具
 docs/speedtest.png           测速结果长什么样（实测截图）
 store/listing.md             Edge 商店上架文案（名称 / 简短描述 / 详细描述 / 权限用途）
-store/logo-300.png           商店徽标 300×300（tools/make-logo.py 生成）
+store/logo-300.png           商店徽标 300×300（与扩展图标同款）
 store/listing-bilingual.md   商店中英文文案
 store/screenshots/           商店截图 1280×800（设置页 / 测速 / 页面按钮）
 PRIVACY.md                   隐私说明（Markdown 原文）
